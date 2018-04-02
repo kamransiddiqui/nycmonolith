@@ -21,6 +21,20 @@ public class User {
     @Column(name = "LAST_NAME")
     private String lastName;
 
+    @Column(name = "EMAIL")
+    private String email;
+
+    @Column(name = "JOB")
+    private String job;
+
+    public User(String userName, String firstName, String lastName, String email, String job) {
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.job = job;
+    }
+
 
 
 
