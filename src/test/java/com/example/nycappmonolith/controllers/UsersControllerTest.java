@@ -22,6 +22,9 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(UsersController.class)
@@ -176,6 +179,14 @@ public class UsersControllerTest {
         this.mockMvc
                 .perform(get("/users/4"))
                 .andExpect(status().reason(containsString("User with ID of 4 was not found!")));
+    }
+
+    @Test
+    public void deleteUserById_success_returnsStatusOk() throws Exception {
+
+        this.mockMvc
+                .perform(delete("/1"))
+                .andExpect(status().isOk());
     }
 
 
