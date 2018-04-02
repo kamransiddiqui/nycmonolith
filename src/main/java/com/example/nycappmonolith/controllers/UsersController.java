@@ -3,6 +3,7 @@ package com.example.nycappmonolith.controllers;
 import com.example.nycappmonolith.models.User;
 import com.example.nycappmonolith.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import javassist.NotFoundException;
@@ -41,6 +42,14 @@ public class UsersController {
             HttpServletResponse response) throws IOException {
 
         response.sendError(HttpStatus.NOT_FOUND.value(), exception.getMessage());
+    }
+
+    @ExceptionHandler
+    void handleDeleteNotFoundException(
+            EmptyResultDataAccessException exception,
+            HttpServletResponse response) throws IOException {
+
+        response.sendError(HttpStatus.NOT_FOUND.value());
     }
 
     @DeleteMapping("/users/{userId}")
