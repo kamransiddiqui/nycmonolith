@@ -43,6 +43,8 @@ public class UsersController {
         userFromDb.setUserName(userRequest.getUserName());
         userFromDb.setFirstName(userRequest.getFirstName());
         userFromDb.setLastName(userRequest.getLastName());
+        userFromDb.setLastName(userRequest.getEmail());
+        userFromDb.setLastName(userRequest.getJob());
 
         return userRepository.save(userFromDb);
     }
