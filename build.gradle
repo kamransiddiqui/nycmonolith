@@ -34,10 +34,31 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
-	runtime 'org.springframework.boot:spring-boot-devtools'
-	runtime('org.postgresql:postgresql')
 	compile 'org.flywaydb:flyway-core'
 	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+
 	compileOnly 'org.projectlombok:lombok'
+
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile 'io.rest-assured:rest-assured:3.0.6'
+
+	runtime 'org.springframework.boot:spring-boot-devtools'
+	runtime('org.postgresql:postgresql')
+
 }
+
+//task waitForUsersAPI(type: Exec) {
+//	commandLine './wait-for-api.sh','http://localhost:8080', 'Users API'
+//}
+//
+test {
+	dependsOn cleanTest
+//	dependsOn waitForUsersAPI
+//
+	testLogging {
+	exceptionFormat "full"
+	events "skipped", "passed", "failed"
+	displayGranularity 2
+	}
+}
+
