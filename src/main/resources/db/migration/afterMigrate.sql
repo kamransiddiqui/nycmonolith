@@ -1,7 +1,5 @@
 INSERT INTO USERS
-	(USER_NAME)
+	(USER_NAME, FIRST_NAME, LAST_NAME, EMAIL, JOB)
 VALUES
-	('user from seeds'),
-	('another user'),
-	('someone'),
-	('someone else');
+	('username', 'First', 'Last', '', ''),
+    ('username', 'First', 'Last', '', '');
