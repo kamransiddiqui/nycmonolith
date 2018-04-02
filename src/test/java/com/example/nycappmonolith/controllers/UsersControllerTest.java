@@ -15,6 +15,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
@@ -160,5 +161,23 @@ public class UsersControllerTest {
                 .perform(get("/users/1"))
                 .andExpect(jsonPath("$.job", is("engineer")));
     }
+
+    @Test
+    public void findUserById_failure_userNotFoundReturns404() throws Exception {
+
+        this.mockMvc
+                .perform(get("/users/4"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void findUserById_failure_userNotFoundReturnsNotFoundErrorMessage() throws Exception {
+
+        this.mockMvc
+                .perform(get("/users/4"))
+                .andExpect(status().reason(containsString("User with ID of 4 was not found!")));
+    }
+
+
 
 }
