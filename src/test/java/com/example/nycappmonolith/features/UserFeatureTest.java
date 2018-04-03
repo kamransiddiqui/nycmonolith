@@ -65,7 +65,7 @@ public class UserFeatureTest {
                 "Not",
                 "Yet Created",
                 "",
-                ""
+                "second job"
         );
 
         given()

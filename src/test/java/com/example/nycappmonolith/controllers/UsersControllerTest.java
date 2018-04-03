@@ -62,15 +62,15 @@ public class UsersControllerTest {
                 "Someone",
                 "Else",
                 "jabroony@gmail.com",
-                "custoian"
+                "custodian"
         );
 
         newUser = new User(
                 "new_user_for_create",
                 "New",
                 "User",
-                "newemail@gmail.com",
-                "newjob"
+                "new email",
+                "new job"
         );
 
         updatedSecondUser = new User(
