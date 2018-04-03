@@ -45,6 +45,7 @@ public class UsersControllerTest {
     private UserRepository mockUserRepository;
 
     private User newUser;
+    private User updatedSecondUser;
 
     @Before
     public void setUp() {
@@ -71,7 +72,15 @@ public class UsersControllerTest {
                 "newemail@gmail.com",
                 "newjob"
         );
-        given(mockUserRepository.save(newUser)).willReturn(newUser);
+
+        updatedSecondUser = new User(
+                "updated_username",
+                "Updated",
+                "Info",
+                "second@gmail.com",
+                "secondjob"
+        );
+
 
         Iterable<User> mockUsers =
                 Stream.of(firstUser, secondUser).collect(Collectors.toList());
@@ -79,6 +88,8 @@ public class UsersControllerTest {
         given(mockUserRepository.findAll()).willReturn(mockUsers);
         given(mockUserRepository.findById(1L)).willReturn(Optional.ofNullable(firstUser));
         given(mockUserRepository.findById(4L)).willReturn(null);
+        given(mockUserRepository.save(updatedSecondUser)).willReturn(updatedSecondUser);
+        given(mockUserRepository.save(newUser)).willReturn(newUser);
 
         // Mock out Delete to return EmptyResultDataAccessException for missing user with ID of 4
         doAnswer(invocation -> {
@@ -290,7 +301,7 @@ public class UsersControllerTest {
                 .andExpect(jsonPath("$.email", is("new email")));
     }
     @Test
-    public void createUser_success_returnsJon() throws Exception {
+    public void createUser_success_returnsJob() throws Exception {
 
         this.mockMvc
                 .perform(
@@ -301,6 +312,101 @@ public class UsersControllerTest {
                 .andExpect(jsonPath("$.job", is("new job")));
     }
 
+    @Test
+    public void updateUserById_success_returnsStatusOk() throws Exception {
+
+        this.mockMvc
+                .perform(
+                        patch("/users/1")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(jsonObjectMapper.writeValueAsString(updatedSecondUser))
+                )
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void updateUserById_success_returnsUpdatedUserName() throws Exception {
+
+        this.mockMvc
+                .perform(
+                        patch("/users/1")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(jsonObjectMapper.writeValueAsString(updatedSecondUser))
+                )
+                .andExpect(jsonPath("$.userName", is("new_username")));
+    }
+
+    @Test
+    public void updateUserById_success_returnsUpdatedFirstName() throws Exception {
+
+        this.mockMvc
+                .perform(
+                        patch("/users/1")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(jsonObjectMapper.writeValueAsString(updatedSecondUser))
+                )
+                .andExpect(jsonPath("$.firstName", is("new")));
+    }
+
+    @Test
+    public void updateUserById_success_returnsUpdatedLastName() throws Exception {
+
+        this.mockMvc
+                .perform(
+                        patch("/users/1")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(jsonObjectMapper.writeValueAsString(updatedSecondUser))
+                )
+                .andExpect(jsonPath("$.lastName", is("name")));
+    }
+
+    @Test
+    public void updateUserById_success_returnsUpdatedEmail() throws Exception {
+
+        this.mockMvc
+                .perform(
+                        patch("/users/1")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(jsonObjectMapper.writeValueAsString(updatedSecondUser))
+                )
+                .andExpect(jsonPath("$.email", is("updated email")));
+    }
+
+    @Test
+    public void updateUserById_success_returnsUpdatedJob() throws Exception {
+
+        this.mockMvc
+                .perform(
+                        patch("/users/1")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(jsonObjectMapper.writeValueAsString(updatedSecondUser))
+                )
+                .andExpect(jsonPath("$.job", is("updated job")));
+    }
+
+    @Test
+    public void updateUserById_failure_userNotFoundReturns404() throws Exception {
+
+        this.mockMvc
+                .perform(
+                        patch("/users/4")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(jsonObjectMapper.writeValueAsString(updatedSecondUser))
+                )
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void updateUserById_failure_userNotFoundReturnsNotFoundErrorMessage() throws Exception {
+
+        this.mockMvc
+                .perform(
+                        patch("/users/4")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(jsonObjectMapper.writeValueAsString(updatedSecondUser))
+                )
+                .andExpect(status().reason(containsString("User with ID of 4 was not found!")));
+    }
 
 
 }
