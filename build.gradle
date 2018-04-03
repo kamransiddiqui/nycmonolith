@@ -41,11 +41,20 @@ dependencies {
 
 	compileOnly 'org.projectlombok:lombok'
 
+	runtime 'org.springframework.boot:spring-boot-devtools'
+	runtime('org.postgresql:postgresql')
+
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile 'io.rest-assured:rest-assured:3.0.6'
 
-	runtime 'org.springframework.boot:spring-boot-devtools'
-	runtime('org.postgresql:postgresql')
+	testCompile 'org.seleniumhq.selenium:selenium-java:3.9.1'
+	testCompile 'org.seleniumhq.selenium:selenium-api:3.9.1'
+	testCompile 'org.seleniumhq.selenium:selenium-remote-driver:3.9.1'
+	testCompile 'org.seleniumhq.selenium:selenium-chrome-driver:3.9.1'
+	testCompile 'org.seleniumhq.selenium:selenium-support:3.9.1'
+	testCompile 'com.codeborne:selenide:4.10.01'
+
+
 
 }
 
