@@ -7,8 +7,8 @@ const Home = (props) => {
     <div id='navbar'>
       <h2>NYC Monolith</h2>
       <h3>New York City Search Engine</h3>
-      <Link to="/users" id="users-link"> Users </Link>
-      <Link to="/newuser"> Create username </Link>
+      <Link to="/users" id="users-link"> Users  </Link>
+      <Link to="/newuser"> Create Username </Link>
     </div>
   )
 }

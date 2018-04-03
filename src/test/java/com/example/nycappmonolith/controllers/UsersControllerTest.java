@@ -78,7 +78,7 @@ public class UsersControllerTest {
                 "Updated",
                 "Info",
                 "second@gmail.com",
-                "secondjob"
+                "second job"
         );
 
 

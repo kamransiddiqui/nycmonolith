@@ -29,7 +29,7 @@ public class UsersController {
     public Optional<User> findUserById(@PathVariable Long userId) throws NotFoundException {
         Optional<User> foundUser = userRepository.findById(userId);
 
-        if (foundUser.isPresent()) {
+        if (!foundUser.isPresent()) {
             throw new NotFoundException("User with ID of " + userId + " was not found!");
         }
 
@@ -53,7 +53,7 @@ public class UsersController {
     }
 
     @DeleteMapping("/users/{userId}")
-    public HttpStatus deleteUserById(@PathVariable Long userId) {
+    public HttpStatus deleteUserById(@PathVariable Long userId) throws EmptyResultDataAccessException {
         userRepository.deleteById(userId);
         return HttpStatus.OK;
     }
