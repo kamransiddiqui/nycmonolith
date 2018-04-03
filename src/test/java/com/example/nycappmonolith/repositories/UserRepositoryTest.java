@@ -80,7 +80,7 @@ public class UserRepositoryTest {
 
         String secondUsersLastName = Iterables.get(usersFromDb, 1).getLastName();
 
-        assertThat(secondUsersLastName, is(" other last name"));
+        assertThat(secondUsersLastName, is("other last name"));
     }
 
     @Test

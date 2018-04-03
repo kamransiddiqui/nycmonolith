@@ -1,37 +1,27 @@
-import React, {Component} from 'react'
-import axios from 'axios'
+import React from 'react'
 
 import User from './User'
 
-class UsersList extends Component {
-	state = {
-		users: []
-	}
+const UsersList = (props) => {
 
-	async componentWillMount() {
-        try {
-            const response = await axios.get('/users')
-            this.setState({ users: response.data })
-        } catch (error) {
-            console.log('Error retrieving users!')
-            console.log(error)
-        }
-    }
-	render() {
-	    return (
-	        <div>
-	            <h1>Users list Board</h1>
-	            {
-                this.state.ideas.map((User) => {
-                    return (
-                        <User
-                            {...user}
-                            key={index} />
-                    )                    })
-                }
-	        </div>
-	    )
-	}
+  return (
+    <div id="userPage">
+      <h2>User Page</h2>
+      {
+        props.users.map((user, index) => {
+          return (
+            <User
+              user={user}
+              key={index}
+              index={index}
+              deleteUser={props.deleteUser}
+              handleUserChange={props.handleUserChange}
+              updateUser={props.updateUser} />
+          )
+        })
+      }
+    </div>
+  )
 }
 
 export default UsersList

@@ -64,7 +64,7 @@ public class UserFeatureTest {
                 "new_user",
                 "Not",
                 "Yet Created",
-                "",
+                "great email",
                 "second job"
         );
 

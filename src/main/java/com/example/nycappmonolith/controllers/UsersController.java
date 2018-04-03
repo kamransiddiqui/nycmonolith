@@ -29,7 +29,7 @@ public class UsersController {
     public Optional<User> findUserById(@PathVariable Long userId) throws NotFoundException {
         Optional<User> foundUser = userRepository.findById(userId);
 
-        if (foundUser == null) {
+        if (foundUser.isPresent()) {
             throw new NotFoundException("User with ID of " + userId + " was not found!");
         }
 

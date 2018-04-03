@@ -123,6 +123,6 @@ public class UsersUIFeatureTest {
         $$("[data-user-display]").shouldHave(size(2));
 
         refresh();
-        
+
     }
 }
