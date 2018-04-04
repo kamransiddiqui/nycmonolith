@@ -28,7 +28,6 @@ public class UserFeatureTest {
     public void setUp() {
         userRepository.deleteAll();
 
-
     }
 
     @After
